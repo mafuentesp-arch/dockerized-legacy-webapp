@@ -1,0 +1,62 @@
+Enhance attendance_manage.php.
+
+Requirement:
+After loading attendance for a roster and date, display a summary bar showing the number of students by attendance/status category.
+
+Show these counters above the attendance table:
+
+Present: X
+Absent: X
+Dropped: X
+Moved: X
+Promoted: X
+Active: X
+Total Students: X
+
+Display them as colored cards/badges:
+
+Present   -> Green
+Absent    -> Red
+Dropped   -> Dark Red
+Moved     -> Orange
+Promoted  -> Blue
+Active    -> Green/Teal
+Total     -> Dark Gray
+
+Rules:
+1. Use the currently loaded roster and class date.
+2. Counts must update every time the user clicks Load.
+3. Counts must respect all active filters.
+4. Students marked Retired/Dropped must appear in Dropped.
+5. Students marked Moved or Transfer must appear in Moved.
+6. Students marked Promoted must appear in Promoted.
+7. Students with status Active must appear in Active.
+8. Present/Absent must be calculated from attendance records for the selected date.
+9. Do not change existing attendance functionality.
+
+Example:
+
+----------------------------------------------------
+Present: 18 | Absent: 3 | Dropped: 2 |
+Moved: 1 | Promoted: 4 | Active: 21 |
+Total Students: 28
+----------------------------------------------------
+
+Implementation:
+Create a reusable function:
+
+getAttendanceSummary($roster_id, $class_date)
+
+Return:
+
+[
+  'present' => 18,
+  'absent' => 3,
+  'dropped' => 2,
+  'moved' => 1,
+  'promoted' => 4,
+  'active' => 21,
+  'total' => 28
+]
+
+Render the summary cards before the attendance grid.

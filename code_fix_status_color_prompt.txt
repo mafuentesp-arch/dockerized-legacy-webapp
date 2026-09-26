@@ -1,0 +1,23 @@
+Fix status colors in all dashboards and attendance screens.
+
+Problem:
+Dropped/Retired students are displayed with the same color as Active students.
+
+Required:
+- Active = green (bg-success)
+- Dropped / Retired = red (bg-danger)
+- Promoted = blue (bg-info)
+- Moved = yellow/orange (bg-warning)
+- Unknown = gray (bg-secondary)
+
+Search all files for:
+badge
+status colors
+status labels
+dashboard cards
+attendance summary
+
+Update all status badges, summary counters and charts to use the correct color mapping.
+
+Do not modify calculations or counts.
+Only change visual status colors.

@@ -1,0 +1,32 @@
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/apache/Dockerfile
+    container_name: esol2-web
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: ${MARIADB_DATABASE}
+      DB_USER: ${MARIADB_USER}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+
+  db:
+    image: mariadb:10.11
+    container_name: esol2-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - esol2_db_data:/var/lib/mysql
+      - ./database/esol2_demo.sql:/docker-entrypoint-initdb.d/01-esol2.sql:ro
+
+volumes:
+  esol2_db_data:
